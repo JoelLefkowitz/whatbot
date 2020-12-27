@@ -6,7 +6,7 @@ describe("Test utils.parseMessage", () => {
     expect(
       isEqual(
         parseMessage({
-          message: "abc",
+          message: { conversation: "abc" },
           key: {
             remoteJid: "123",
             fromMe: true,

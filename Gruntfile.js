@@ -31,5 +31,8 @@ module.exports = function (grunt) {
   grunt.registerTask("format", ["prettier", "csscomb"]);
   grunt.registerTask("tests", ["jasmine"]);
   grunt.registerTask("prebuild", ["format", "lint"]);
-  grunt.registerTask("dev", ["prebuild", "build", "tests", "run"]);
+  grunt.registerTask("prepublish", ["prebuild", "compile", "tests"]);
+
+  grunt.registerTask("dev", ["prepublish", "run"]);
+  grunt.registerTask("devNew", ["prepublish", "new"]);
 };

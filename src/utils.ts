@@ -2,7 +2,7 @@ import { WAMessage, Message } from "./abstraction";
 
 export const parseMessage = (message: WAMessage): Message => ({
   id: message["key"]["remoteJid"],
-  text: message["message"],
+  text: message["message"]["conversation"],
   fromMe: message["key"]["fromMe"],
 });
 

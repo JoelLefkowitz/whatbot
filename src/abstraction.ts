@@ -5,7 +5,7 @@ export interface ChatUpdate {
 }
 
 export interface WAMessage {
-  message: string;
+  message: { conversation: string };
   key: {
     remoteJid: string;
     fromMe: boolean;

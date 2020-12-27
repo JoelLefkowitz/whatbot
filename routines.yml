@@ -1,12 +1,25 @@
 # Builders
-build:
+compile:
     - npx
     - tsc
+image:
+    - docker
+    - build
+    - .
+    - -t
+    - joellefkowitz/autobots:0.1.0
 
 # Runners
 run:
     - node
     - dist/main.js
+    - keyfile.json
+
+new:
+    - node
+    - dist/main.js
+    - keyfile.json
+    - --new
 
 # Linters
 cspell:
