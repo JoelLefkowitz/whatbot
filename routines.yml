@@ -7,7 +7,7 @@ image:
     - build
     - .
     - -t
-    - joellefkowitz/autobots:0.1.0
+    - joellefkowitz/autobots:0.2.0
 
 # Runners
 run:
