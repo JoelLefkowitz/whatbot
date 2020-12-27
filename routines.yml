@@ -1,0 +1,38 @@
+# Builders
+build:
+    - npx
+    - tsc
+
+# Runners
+run:
+    - node
+    - dist/main.js
+
+# Linters
+cspell:
+    - cspell
+    - ./**/*
+    - "-c"
+    - .cspell.json
+eslint:
+    - npx
+    - eslint
+    - "src/**/*.{js,ts,html,css}"
+    - "-c"
+    - .eslintrc.yml
+    - --no-error-on-unmatched-pattern
+
+# Formatters
+csscomb:
+    - csscomb
+    - .
+prettier:
+    - prettier
+    - "**/*.{js,ts,html,css}"
+    - --write
+
+# tests
+jasmine:
+    - npx
+    - jasmine-node
+    - dist

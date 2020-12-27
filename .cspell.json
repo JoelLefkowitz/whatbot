@@ -1,0 +1,48 @@
+{
+  "language": "en",
+  "ignorePaths": [
+    "dist/**",
+    "node_modules/**",
+    "__pycache__/**"
+  ],
+  "dictionaries": [
+    "softwareTerms",
+    "python",
+    "node",
+    "typescript",
+    "misc"
+  ],
+  "words": [
+    "autoflake",
+    "adiwajshing",
+    "whatsapp",
+    "buildbot",
+    "buildmaster",
+    "deps",
+    "entrypoint",
+    "gmail",
+    "groupby",
+    "hvac",
+    "isort",
+    "itertools",
+    "joellefkowitz",
+    "Lefkowitz",
+    "libffi",
+    "mlock",
+    "noqa",
+    "numpy",
+    "postgres",
+    "postgresql",
+    "psycopg",
+    "pytest",
+    "randutils",
+    "recents",
+    "repourl",
+    "setuptools",
+    "smoothycode",
+    "sqlite",
+    "workdir",
+    "yasg",
+    "zfill"
+  ]
+}

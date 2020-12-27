@@ -1,0 +1,27 @@
+{
+  "name": "autobots",
+  "version": "0.1.0",
+  "devDependencies": {
+    "@types/jasmine": "^3.6.2",
+    "@types/long": "^4.0.1",
+    "@typescript-eslint/eslint-plugin": "^4.11.0",
+    "@typescript-eslint/parser": "^4.11.0",
+    "eslint": "^7.16.0",
+    "grunt": "^1.3.0",
+    "grunt-cli": "^1.3.0",
+    "grunt-exec": "^3.0.0",
+    "grunt-force-task": "^2.0.0",
+    "jasmine-expect": "^5.0.0",
+    "jasmine-matchers": "^0.2.3",
+    "jasmine-node": "^3.0.0",
+    "lodash": "^4.17.20",
+    "npx": "^10.2.2",
+    "tsc": "^1.20150623.0",
+    "typescript": "^4.1.3",
+    "yaml": "^1.10.0"
+  },
+  "dependencies": {
+    "@adiwajshing/baileys": "github:adiwajshing/baileys",
+    "long": "^4.0.0"
+  }
+}

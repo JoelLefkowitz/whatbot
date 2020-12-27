@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "sourceMap": true,
+    "types": ["node", "jasmine", "jasmine-expect", "long"],
+    "target": "es5",
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "lib": [ "es2015", "dom",  "es2017" ],
+    "outDir": "./dist", 
+    "removeComments": true,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true
+  }
+}
