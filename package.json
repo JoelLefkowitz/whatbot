@@ -15,16 +15,13 @@
     "jasmine-matchers": "^0.2.3",
     "jasmine-node": "^3.0.0",
     "lodash": "^4.17.20",
-    "npx": "^10.2.2",
-    "tsc": "^1.1.0",
-    "ts-loader": "^5.4.4",
-    "typescript": "^4.1.0",
     "yaml": "^1.10.0"
   },
   "dependencies": {
     "@adiwajshing/baileys": "github:adiwajshing/baileys",
     "argparse": "^2.0.1",
     "badwords": "^1.0.0",
-    "long": "^4.0.0"
+    "long": "^4.0.0",
+    "typescript": "^4.1.3"
   }
 }

@@ -1,4 +1,5 @@
 keyfile.json
+whitelist.json
 __pypackages__/
 !.vscode/extensions.json
 !.vscode/launch.json

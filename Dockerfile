@@ -1,13 +1,12 @@
-FROM node:15.5-buster
+FROM node:15.5
 
 WORKDIR /autobots
-ENV PATH /autobots/node_modules/.bin:$PATH
-
 COPY package.json .
+COPY tsconfig.json .
+RUN npm i -g typescript
 RUN npm i
 
 COPY src src
-COPY tsconfig.json .
-RUN npx tsc
+RUN tsc
 
 ENTRYPOINT ["node", "dist/main.js", "keyfile.json"]

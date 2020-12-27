@@ -14,12 +14,16 @@ run:
     - node
     - dist/main.js
     - keyfile.json
+    - --whitelist
+    - whitelist.json
 
 new:
     - node
     - dist/main.js
     - keyfile.json
     - --new
+    - --whitelist
+    - whitelist.json
 
 # Linters
 cspell:

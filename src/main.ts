@@ -1,20 +1,27 @@
-import { parseMessage, isSingleId } from "./utils";
-import { getReply } from "./replies";
+import { getCliArgs, whitelistParser } from "./cli";
+import { parseMessage } from "./utils";
+import { loadSession, newSession } from "./sessions";
+import { simpleListener } from "./listeners";
 import { ChatUpdate } from "./abstraction";
 import { MessageType } from "@adiwajshing/baileys";
-import { loadSession, newSession } from "./sessions";
-import argparse = require("argparse");
 
-export const listen = async (keyfile: string): Promise<void> => {
-  const conn = await loadSession(keyfile);
+const main = async () => {
+  const args = getCliArgs();
+
+  const conn = args.newSession
+    ? newSession(args.keyfile)
+    : loadSession(args.keyfile);
+
+  const whitelist = args.whitelist ? whitelistParser(args.whitelist) : [];
 
   conn.on("chat-update", (chatUpdate: ChatUpdate) => {
     if (chatUpdate.messages) {
       const latest = chatUpdate.messages.all()[0];
       const message = parseMessage(latest);
+      const reply = simpleListener(message, whitelist);
 
-      if (!message.fromMe && isSingleId(message.id)) {
-        conn.sendMessage(message.id, getReply(message.text), MessageType.text);
+      if (reply.permit) {
+        conn.sendMessage(reply.recipientId, reply.text, MessageType.text);
       }
     }
   });
@@ -22,20 +29,6 @@ export const listen = async (keyfile: string): Promise<void> => {
   await conn.connect();
 };
 
-export const startNew = async (keyfile: string): Promise<void> => {
-  const conn = await newSession(keyfile);
-  await conn.connect();
-};
-
-export const getParser = (): argparse.ArgumentParser => {
-  const parser = new argparse.ArgumentParser({
-    description: "Argparse example",
-  });
-
-  parser.add_argument("keyfile");
-  parser.add_argument("--new", { action: "store_true" });
-  return parser;
-};
-
-const args = getParser().parse_args();
-args.new ? startNew(args.keyfile) : listen(args.keyfile);
+main().catch((err) => {
+  console.error(err);
+});
