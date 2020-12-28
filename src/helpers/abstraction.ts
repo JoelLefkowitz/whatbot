@@ -10,10 +10,14 @@ export interface WAMessage {
     remoteJid: string;
     fromMe: boolean;
   };
+  messageTimestamp: {
+    low: number;
+  };
 }
 
 export interface Message {
   id: string;
   text: string;
   fromMe: boolean;
+  timestamp: Date;
 }

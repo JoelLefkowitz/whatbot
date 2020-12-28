@@ -1,6 +1,6 @@
 {
   "name": "autobots",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "devDependencies": {
     "@types/jasmine": "^3.6.2",
     "@types/long": "^4.0.1",

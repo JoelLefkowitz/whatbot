@@ -1,34 +1,31 @@
-import { getCliArgs, whitelistParser } from "./cli";
-import { parseMessage } from "./utils";
+import { getCliArgs, parseWhitelist } from "./cli";
 import { loadSession, newSession } from "./sessions";
 import { simpleListener } from "./listeners";
 import { ChatUpdate } from "./abstraction";
 import { MessageType } from "@adiwajshing/baileys";
 
-const main = async () => {
+async function main() {
   const args = getCliArgs();
 
   const conn = args.newSession
     ? newSession(args.keyfile)
     : loadSession(args.keyfile);
 
-  const whitelist = args.whitelist ? whitelistParser(args.whitelist) : [];
+  const whitelist = args.whitelist ? parseWhitelist(args.whitelist) : [];
 
   conn.on("chat-update", (chatUpdate: ChatUpdate) => {
     if (chatUpdate.messages) {
-      const latest = chatUpdate.messages.all()[0];
-      const message = parseMessage(latest);
-      const reply = simpleListener(message, whitelist);
+      const lazyResponse = simpleListener(chatUpdate.messages.all(), whitelist);
 
-      if (reply.permit) {
-        conn.sendMessage(reply.recipientId, reply.text, MessageType.text);
+      if (reply.permit()) {
+        conn.sendMessage(
+          lazyResponse.recipientId,
+          lazyResponse.text(),
+          MessageType.text
+        );
       }
     }
   });
 
   await conn.connect();
-};
-
-main().catch((err) => {
-  console.error(err);
-});
+}

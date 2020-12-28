@@ -9,4 +9,10 @@ RUN npm i
 COPY src src
 RUN tsc
 
-ENTRYPOINT ["node", "dist/main.js", "keyfile.json"]
+ENTRYPOINT [       \
+  "node",          \
+  "dist/main.js",  \
+  "keyfile.json",  \
+  "--whitelist",   \
+  "whitelist.json" \
+]

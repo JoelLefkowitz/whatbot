@@ -17,8 +17,3 @@ export const getCliArgs = (): CliArgs => {
   parser.add_argument("--newSession", { action: "store_true" });
   return parser.parse_args();
 };
-
-// TODO Error handling
-export const whitelistParser = (path: string): string[] => {
-  return Object.values(JSON.parse(fs.readFileSync(path, "utf8")));
-};
