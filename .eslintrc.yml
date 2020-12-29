@@ -7,7 +7,7 @@
   "parserOptions": {
     "sourceType": "module",
   },
-    "rules": {
-        "semi": "error"
-    }
+  "rules": {
+      "semi": "error"
+  }
 }

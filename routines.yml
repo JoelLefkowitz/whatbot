@@ -34,15 +34,12 @@ cspell:
 eslint:
     - npx
     - eslint
-    - "src/**/*.{js,ts,html,css}"
     - "-c"
     - .eslintrc.yml
+    - "src/**/*.{js,ts,html,css}"
     - --no-error-on-unmatched-pattern
 
 # Formatters
-csscomb:
-    - csscomb
-    - .
 prettier:
     - prettier
     - "src/**/*.{js,ts,html,css}"
@@ -51,5 +48,8 @@ prettier:
 # tests
 jasmine:
     - npx
+    - istanbul
+    - cover
+    - --include-all-sources
     - jasmine-node
     - dist

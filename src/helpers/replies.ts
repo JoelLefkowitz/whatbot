@@ -26,7 +26,3 @@ export function isProfane(message: string): boolean {
   const lower = message.toLowerCase();
   return badwordsArray.some((word: string) => lower.includes(word));
 }
-
-export function memorylessResponse(messageText: string): string {
-  return isProfane(messageText) ? profanityResponse() : excuseResponse();
-}

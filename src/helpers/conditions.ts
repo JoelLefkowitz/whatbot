@@ -1,29 +1,59 @@
+import { Message } from "./abstraction";
+import { isSingleId } from "../utils/ids";
+import { hoursSince } from "../utils/time";
+
 export interface LazyCondition {
   label: string;
   condition: () => boolean;
 }
 
-export const notFromMe = (message: Message): ResponseCondition => ({
-  label: "Not from me",
-  condition: (): boolean => !message.fromMe,
-});
+export function checkFailure(x: LazyCondition): boolean {
+  const isFail = !x.condition();
+  console.log([x.label, "->", isFail ? "Failed" : "Passed"].join(" "));
+  return isFail;
+}
 
-export const fromSingle = (message: Message): ResponseCondition => ({
-  label: "From single person",
-  condition: (): boolean => isSingleId(message.id),
-});
+export function sentByAnIndividual(message: Message): LazyCondition {
+  return {
+    label: "The message was sent by an individual",
+    condition: (): boolean => !message.fromMe && isSingleId(message.remoteId),
+  };
+}
 
-export const notWhitelisted = (
+export function notFromAWhitelistedSender(
   message: Message,
   whitelist: string[]
-): ResponseCondition => ({
-  label: "Not whitelisted",
-  condition: (): boolean => !whitelist.includes(message.id),
-});
+): LazyCondition {
+  return {
+    label: "The message was not from a whitelisted sender",
+    condition: (): boolean => !whitelist.includes(message.remoteId),
+  };
+}
 
-// const latestReply = messages.find(
-//   (message: WAMessage) => parseMessage(message).fromMe
-// );
+export function fromAnKnownSender(messages: Message[]): LazyCondition {
+  return {
+    label: "The message was from a sender that has once been replied to",
+    condition: (): boolean => {
+      const latestReplyFromMe = messages.find(
+        (message: Message) => message.fromMe
+      );
+      return typeof latestReplyFromMe != "undefined";
+    },
+  };
+}
 
-// typeof latestReply !== "undefined",
-// hoursSince(parseMessage(latestReply).timestamp) > 1,
+export function fromAColdSender(messages: Message[]): LazyCondition {
+  return {
+    label:
+      "The message was from a sender that hasn't been replied to in the last hour",
+    condition: (): boolean => {
+      const latestReplyFromMe = messages.find(
+        (message: Message) => message.fromMe
+      );
+      return (
+        typeof latestReplyFromMe == "undefined" ||
+        hoursSince(latestReplyFromMe.timestamp) > 1
+      );
+    },
+  };
+}

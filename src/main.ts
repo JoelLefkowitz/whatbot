@@ -1,31 +1,18 @@
-import { getCliArgs, parseWhitelist } from "./cli";
-import { loadSession, newSession } from "./sessions";
-import { simpleListener } from "./listeners";
-import { ChatUpdate } from "./abstraction";
-import { MessageType } from "@adiwajshing/baileys";
+import { getArgumentParser } from "./cli";
+import { getWhitelist } from "./parsers/whitelist";
+import { getSession } from "./helpers/sessions";
+import { chatListener } from "./helpers/listeners";
 
-async function main() {
-  const args = getCliArgs();
+async function main(): Promise<void> {
+  const argumentParser = getArgumentParser();
+  const args = argumentParser.parse_args();
+  const conn = getSession(args.keyfile, args.newSession);
+  const whitelist = getWhitelist(args.whitelist);
 
-  const conn = args.newSession
-    ? newSession(args.keyfile)
-    : loadSession(args.keyfile);
-
-  const whitelist = args.whitelist ? parseWhitelist(args.whitelist) : [];
-
-  conn.on("chat-update", (chatUpdate: ChatUpdate) => {
-    if (chatUpdate.messages) {
-      const lazyResponse = simpleListener(chatUpdate.messages.all(), whitelist);
-
-      if (reply.permit()) {
-        conn.sendMessage(
-          lazyResponse.recipientId,
-          lazyResponse.text(),
-          MessageType.text
-        );
-      }
-    }
-  });
-
+  conn.on("chat-update", chatListener);
   await conn.connect();
+}
+
+if (require.main === module) {
+  main();
 }

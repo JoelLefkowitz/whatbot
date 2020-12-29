@@ -1,5 +1,5 @@
 import { every } from "lodash";
 
-export function allStrings(list: any[]) {
-  return every(list.map((i: any) => typeof i == "string"));
+export function allStrings(list: unknown[]): list is string[] {
+  return every(list.map((i: unknown) => typeof i == "string"));
 }

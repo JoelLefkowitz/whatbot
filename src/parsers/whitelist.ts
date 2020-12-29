@@ -1,3 +1,4 @@
+import fs = require("fs");
 import { allStrings } from "../utils/types";
 
 export function parseWhitelist(path: string): string[] {

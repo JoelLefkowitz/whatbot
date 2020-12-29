@@ -14,25 +14,37 @@ function parseYaml(x) {
 }
 
 module.exports = function (grunt) {
-  const execs = joinObjAttrs(parseYaml("routines.yml"));
-  const force = ["prettier"];
+  const forceTasks = ["prettier"];
+  const routines = joinObjAttrs(parseYaml("routines.yml"));
 
-  grunt.initConfig({ exec: execs });
+  const watchers = {
+    prebuild: {
+      files: 'src/**/*.ts',
+      tasks: ['prebuild'],
+      options: {
+        debounceDelay: 500,
+      },
+    }
+  };
+
+  grunt.initConfig({exec: routines, watch: watchers});
+
   grunt.loadNpmTasks("grunt-exec");
+  grunt.loadNpmTasks("grunt-contrib-watch");
   grunt.loadNpmTasks("grunt-force-task");
 
-  for (let name of Object.keys(execs)) {
-    force.includes(name)
+  for (let name of Object.keys(routines)) {
+    forceTasks.includes(name)
       ? grunt.registerTask(name, "force:exec:" + name)
       : grunt.registerTask(name, "exec:" + name);
   }
 
   grunt.registerTask("lint", ["cspell", "eslint"]);
-  grunt.registerTask("format", ["prettier", "csscomb"]);
+  grunt.registerTask("format", ["prettier"]);
   grunt.registerTask("tests", ["jasmine"]);
   grunt.registerTask("prebuild", ["format", "lint"]);
   grunt.registerTask("prepublish", ["prebuild", "compile", "tests"]);
 
   grunt.registerTask("dev", ["prepublish", "run"]);
   grunt.registerTask("devNew", ["prepublish", "new"]);
-};
+}
