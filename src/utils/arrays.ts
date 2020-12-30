@@ -1,4 +1,4 @@
-export function getLast(array: unknown[]): unknown {
+export function getLast<T>(array: T[]): T {
   if (array.length == 0) {
     throw "Cannot get last element of an empty array";
   }

@@ -2,6 +2,15 @@
 compile:
     - npx
     - tsc
+    - -p
+    - src
+    - --pretty
+compileSpecs:
+    - npx
+    - tsc
+    - -p
+    - src/tsconfig.spec.json
+    - --pretty
 image:
     - docker
     - build
@@ -28,7 +37,7 @@ new:
 # Linters
 cspell:
     - cspell
-    - ./**/*
+    - "src{**/,}*"
     - "-c"
     - .cspell.json
 eslint:
@@ -36,14 +45,16 @@ eslint:
     - eslint
     - "-c"
     - .eslintrc.yml
-    - "src/**/*.{js,ts,html,css}"
+    - "src/{**/,}*.ts"
     - --no-error-on-unmatched-pattern
 
 # Formatters
 prettier:
     - prettier
-    - "src/**/*.{js,ts,html,css}"
+    - "src/{**/,}*.ts"
     - --write
+    - --loglevel
+    - error
 
 # tests
 jasmine:

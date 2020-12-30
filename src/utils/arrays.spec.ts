@@ -6,7 +6,7 @@ describe("Test getLast", () => {
   });
 
   it("[] -> Throws error", () => {
-    expect(getLast([])).toThrow(
+    expect(() => getLast([])).toThrow(
       new Error("Cannot get last element of an empty array")
     );
   });

@@ -1,11 +1,6 @@
-import { Message } from "./abstraction";
+import { LazyCondition, Message } from "../helpers/models";
 import { isSingleId } from "../utils/ids";
 import { hoursSince } from "../utils/time";
-
-export interface LazyCondition {
-  label: string;
-  condition: () => boolean;
-}
 
 export function checkFailure(x: LazyCondition): boolean {
   const isFail = !x.condition();
@@ -16,7 +11,7 @@ export function checkFailure(x: LazyCondition): boolean {
 export function sentByAnIndividual(message: Message): LazyCondition {
   return {
     label: "The message was sent by an individual",
-    condition: (): boolean => !message.fromMe && isSingleId(message.remoteId),
+    condition: (): boolean => !message.fromMe && isSingleId(message.remoteJid),
   };
 }
 
@@ -26,11 +21,11 @@ export function notFromAWhitelistedSender(
 ): LazyCondition {
   return {
     label: "The message was not from a whitelisted sender",
-    condition: (): boolean => !whitelist.includes(message.remoteId),
+    condition: (): boolean => !whitelist.includes(message.remoteJid),
   };
 }
 
-export function fromAnKnownSender(messages: Message[]): LazyCondition {
+export function fromAKnownSender(messages: Message[]): LazyCondition {
   return {
     label: "The message was from a sender that has once been replied to",
     condition: (): boolean => {

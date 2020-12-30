@@ -6,9 +6,15 @@
     "module": "commonjs",
     "moduleResolution": "node",
     "lib": [ "es2015", "dom",  "es2017" ],
-    "outDir": "./dist", 
+    "outDir": "../dist",
     "removeComments": true,
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true
-  }
+  },
+  "include": [
+    "**/*.ts"
+  ],
+  "exclude": [
+    "**/*.spec.ts"
+  ],
 }

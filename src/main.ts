@@ -1,15 +1,15 @@
-import { getArgumentParser } from "./cli";
-import { getWhitelist } from "./parsers/whitelist";
-import { getSession } from "./helpers/sessions";
-import { chatListener } from "./helpers/listeners";
+import { getArgumentParser } from "./helpers/cli";
+import { parseWhitelist } from "./parsers/whitelist";
+import { getSession } from "./services/sessions";
+import { chatListener } from "./services/listeners";
 
 async function main(): Promise<void> {
   const argumentParser = getArgumentParser();
   const args = argumentParser.parse_args();
   const conn = getSession(args.keyfile, args.newSession);
-  const whitelist = getWhitelist(args.whitelist);
+  const whitelist = parseWhitelist(args.whitelist);
 
-  conn.on("chat-update", chatListener);
+  conn.on("chat-update", chatListener(conn, whitelist));
   await conn.connect();
 }
 

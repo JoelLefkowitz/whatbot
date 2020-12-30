@@ -1,11 +1,12 @@
-import { PartialWAMessage, Message } from "../helpers/abstraction";
-import { dateFromLong } from "../utils/time";
+import { TextWAMessage } from "../helpers/patches";
+import { Message } from "../helpers/models";
+import { parseDate } from "../utils/time";
 
-export function parseMessage(message: PartialWAMessage): Message {
+export function parseMessage(message: TextWAMessage): Message {
   return {
     text: message["message"]["conversation"],
     fromMe: message["key"]["fromMe"],
-    remoteJId: message["key"]["remoteJid"],
-    timestamp: dateFromLong(message["messageTimestamp"]),
+    remoteJid: message["key"]["remoteJid"],
+    timestamp: parseDate(message["messageTimestamp"]),
   };
 }

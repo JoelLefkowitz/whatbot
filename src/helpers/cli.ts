@@ -1,9 +1,7 @@
 import argparse = require("argparse");
 
-export type ArgumentParser = argparse.ArgumentParser;
-
-export function getArgumentParser(): ArgumentParser {
-  const parser = new ArgumentParser({
+export function getArgumentParser(): argparse.ArgumentParser {
+  const parser = new argparse.ArgumentParser({
     description: "Argparse example",
   });
 
