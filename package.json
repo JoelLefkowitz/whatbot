@@ -1,6 +1,6 @@
 {
   "name": "autobots",
-  "version": "0.2.1",
+  "version": "0.3.0",
   "devDependencies": {
     "@trivago/prettier-plugin-sort-imports": "^1.4.1",
     "@types/jasmine": "^3.6.2",
