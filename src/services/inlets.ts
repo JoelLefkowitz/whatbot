@@ -1,54 +1,33 @@
-import {
-  checkFailure,
-  sentByAnIndividual,
-  notFromAWhitelistedSender,
-  fromAKnownSender,
-  fromAColdSender,
-} from "./conditions";
-import { WAMessage } from "@adiwajshing/baileys";
-import { Message } from "../helpers/models";
 import { parseMessage } from "../parsers/messages";
-import { ChatUpdate } from "../helpers/patches";
-import { WAConnection } from "@adiwajshing/baileys";
+import {
+    checkFailure,
+    notSentByMe,
+    sentByAnIndividual,
+    notFromAWhitelistedSender,
+} from "./conditions";
+import { InletFeedback } from "./models";
+import { ChatUpdate } from "./patches";
 
-export async function chatInlet(
-  conn: WAConnection,
-  chatUpdate: ChatUpdate,
-  historyLength: number,
-  whitelist: string[]
-): Promise<Message[]> {
-  const latestMessage = parseMessage(chatUpdate.messages.all()[0]);
+export function chatInlet(
+    chatUpdate: ChatUpdate,
+    whitelist: string[]
+): InletFeedback {
+    if (!chatUpdate.messages) {
+        return { latest: null, permit: false };
+    }
 
-  if (latestMessage.fromMe) {
-    console.log("");
-  }
+    const latestMessage = parseMessage(
+        chatUpdate.messages.all()[0]
+    );
 
-  console.log("Conversation with: ".concat(latestMessage.remoteJid));
-  console.log("Message text: ".concat(latestMessage.text));
+    const inletConditions = [
+        notSentByMe(latestMessage),
+        sentByAnIndividual(latestMessage),
+        notFromAWhitelistedSender(latestMessage, whitelist),
+    ];
 
-  const messageHistory = (
-    await conn.loadMessages(latestMessage.remoteJid, historyLength)
-  ).messages
-    .filter((message: WAMessage) => message.hasOwnProperty("conversation"))
-    .map(parseMessage);
-
-  console.log(
-    "Fetched chat history: ".concat(
-      messageHistory.length.toString(),
-      " (max = ",
-      historyLength.toString(),
-      ")"
-    )
-  );
-
-  const conditions = [
-    sentByAnIndividual(latestMessage),
-    notFromAWhitelistedSender(latestMessage, whitelist),
-    fromAKnownSender(messageHistory),
-    fromAColdSender(messageHistory),
-  ];
-
-  !conditions.some(checkFailure);
-
-  return messageHistory;
+    return {
+        latest: latestMessage,
+        permit: !inletConditions.some(checkFailure),
+    };
 }

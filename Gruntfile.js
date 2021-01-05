@@ -30,7 +30,7 @@ function watchConfig(x) {
 module.exports = function (grunt) {
   const forceTasks = ["prettier"];
   const watchTasks = [
-    "compile", "compileTests", "prebuild", "prepublish"
+    "compile", "compileSpecs", "prebuild", "prepublish"
   ];
   const routines = parseObjAttrs(
     parseYaml("routines.yml"), joinListEntries
