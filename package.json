@@ -1,5 +1,6 @@
 {
   "name": "autobots",
+  "description": "A configurable Whatsapp chatbot"
   "version": "0.3.0",
   "devDependencies": {
     "@trivago/prettier-plugin-sort-imports": "^1.4.1",
@@ -29,5 +30,15 @@
     "memfs": "^3.2.0",
     "mock-fs": "^4.13.0",
     "typescript": "^4.1.3"
+  },
+  "portfolio": {
+    "project_type": "Published on npm",
+    "languages": ["Typescript"],
+    "frameworks": ["Baileys"],
+    "paradigms": [
+      "Containerised microservices",
+      "Object oriented programming"
+    ],
+    "status": ["In development"]
   }
 }
