@@ -1,6 +1,6 @@
 {
   "name": "autobots",
-  "description": "A configurable Whatsapp chatbot"
+  "description": "A configurable Whatsapp chatbot",
   "version": "0.3.0",
   "devDependencies": {
     "@trivago/prettier-plugin-sort-imports": "^1.4.1",
