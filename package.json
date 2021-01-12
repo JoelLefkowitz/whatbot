@@ -1,5 +1,5 @@
 {
-  "name": "autobots",
+  "name": "whatbot",
   "description": "A configurable Whatsapp chatbot",
   "version": "0.3.0",
   "devDependencies": {

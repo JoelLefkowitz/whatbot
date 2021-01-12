@@ -16,7 +16,7 @@ image:
     - build
     - .
     - -t
-    - joellefkowitz/autobots:0.3.0
+    - joellefkowitz/whatbot:0.3.0
 
 # Runners
 run:

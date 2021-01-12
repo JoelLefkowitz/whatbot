@@ -1,6 +1,6 @@
 FROM node:15.5
 
-WORKDIR /autobots
+WORKDIR /whatbot
 COPY package.json .
 RUN npm i -g typescript
 RUN npm i
