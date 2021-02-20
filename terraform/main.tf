@@ -29,7 +29,7 @@ provider "aws" {
 
 module "cluster" {
   source  = "JoelLefkowitz/cluster/digitalocean"
-  version = "1.4.4"
+  version = "1.4.5"
   
   project = "whatbot"
   env = "production"

@@ -2,7 +2,11 @@ import { allStrings } from "../utils/types";
 
 import fs = require("fs");
 
-export function parseWhitelist(path: string): string[] {
+export function parseWhitelist(path: string | null): string[] {
+    if (!path) {
+        return [];
+    }
+    
     if (!fs.existsSync(path)) {
         throw "Whitelist not found";
     }

@@ -1,7 +1,7 @@
 {
   "name": "whatbot",
   "description": "A configurable Whatsapp chatbot",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "devDependencies": {
     "@trivago/prettier-plugin-sort-imports": "^1.4.1",
     "@types/jasmine": "^3.6.2",
@@ -26,6 +26,7 @@
     "@adiwajshing/baileys": "github:adiwajshing/baileys",
     "argparse": "^2.0.1",
     "badwords": "^1.0.0",
+    "chalk": "^4.1.0",
     "long": "^4.0.0",
     "memfs": "^3.2.0",
     "mock-fs": "^4.13.0",
@@ -33,12 +34,18 @@
   },
   "portfolio": {
     "project_type": "Published on npm",
-    "languages": ["Typescript"],
-    "frameworks": ["Baileys"],
+    "languages": [
+      "Typescript"
+    ],
+    "frameworks": [
+      "Baileys"
+    ],
     "paradigms": [
       "Containerised microservices",
       "Object oriented programming"
     ],
-    "status": ["In development"]
+    "status": [
+      "In development"
+    ]
   }
 }

@@ -1,0 +1,6 @@
+pull_images:
+  - joellefkowitz/whatbot:0.4.0
+env_files:
+  - keyfile.json
+  - whitelist.json
+  - logs.log

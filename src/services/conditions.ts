@@ -1,11 +1,12 @@
-import { isSingleId } from "../utils/ids";
-import { hoursSince } from "../utils/time";
 import { LazyCondition, Message } from "./models";
-import { booleanReporter } from "./reporters";
 
-export function checkFailure(x: LazyCondition): boolean {
+import { Reporter } from "./reporters";
+import { hoursSince } from "../utils/time";
+import { isSingleId } from "../utils/ids";
+
+export function checkFailure(x: LazyCondition, reporter: Reporter): boolean {
     const passed = x.condition();
-    booleanReporter(x.label, passed);
+    reporter.boolean(x.label, passed);
     return !passed;
 }
 

@@ -1,16 +1,19 @@
-import { parseMessage } from "../parsers/messages";
 import {
     checkFailure,
+    notFromAWhitelistedSender,
     notSentByMe,
     sentByAnIndividual,
-    notFromAWhitelistedSender,
 } from "./conditions";
-import { InletFeedback } from "./models";
+
 import { ChatUpdate } from "./patches";
+import { InletFeedback } from "./models";
+import { Reporter } from "../services/reporters";
+import { parseMessage } from "../parsers/messages";
 
 export function chatInlet(
     chatUpdate: ChatUpdate,
-    whitelist: string[]
+    whitelist: string[],
+    reporter: Reporter
 ): InletFeedback {
     if (!chatUpdate.messages) {
         return { latest: null, permit: false };
@@ -20,6 +23,7 @@ export function chatInlet(
         chatUpdate.messages.all()[0]
     );
 
+    reporter.event("Message observed", latestMessage.text);
     const inletConditions = [
         notSentByMe(latestMessage),
         sentByAnIndividual(latestMessage),
@@ -28,6 +32,8 @@ export function chatInlet(
 
     return {
         latest: latestMessage,
-        permit: !inletConditions.some(checkFailure),
+        permit: !inletConditions.some((condition) =>
+            checkFailure(condition, reporter)
+        ),
     };
 }
