@@ -5,16 +5,12 @@
     "target": "es5",
     "module": "commonjs",
     "moduleResolution": "node",
-    "lib": [ "es2015", "dom",  "es2017" ],
+    "lib": ["es2015", "dom", "es2017"],
     "outDir": "../dist",
     "removeComments": true,
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true
   },
-  "include": [
-    "**/*.ts"
-  ],
-  "exclude": [
-    "**/*.spec.ts"
-  ],
+  "include": ["**/*.ts"],
+  "exclude": ["**/*.spec.ts"]
 }

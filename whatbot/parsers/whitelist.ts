@@ -3,25 +3,23 @@ import { allStrings } from "../utils/types";
 import fs = require("fs");
 
 export function parseWhitelist(path: string | null): string[] {
-    if (!path) {
-        return [];
-    }
-    
-    if (!fs.existsSync(path)) {
-        throw "Whitelist not found";
-    }
+  if (!path) {
+    return [];
+  }
 
-    const whitelist = JSON.parse(fs.readFileSync(path, "utf8"));
+  if (!fs.existsSync(path)) {
+    throw "Whitelist not found";
+  }
 
-    if (Object.keys(whitelist).length === 0) {
-        throw "Whitelist must not be empty";
-    }
+  const whitelist = JSON.parse(fs.readFileSync(path, "utf8"));
 
-    if (!allStrings(Object.values(whitelist))) {
-        throw "Whitelist values must be strings";
-    }
+  if (Object.keys(whitelist).length === 0) {
+    throw "Whitelist must not be empty";
+  }
 
-    return Object.values(whitelist).map(
-        (i: string) => i + "@s.whatsapp.net"
-    );
+  if (!allStrings(Object.values(whitelist))) {
+    throw "Whitelist values must be strings";
+  }
+
+  return Object.values(whitelist).map((i: string) => i + "@s.whatsapp.net");
 }

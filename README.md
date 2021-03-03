@@ -1,6 +1,6 @@
 # Whatbot
 
-A configurable Whatsapp chatbot
+A configurable Whatsapp chatbot.
 
 ## Status
 

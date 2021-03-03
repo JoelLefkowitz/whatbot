@@ -4,12 +4,12 @@ services:
   whatbot:
     image: joellefkowitz/whatbot:0.4.0
     volumes:
-    - type: bind
-      source: /root/deploy/keyfile.json
-      target: /whatbot/keyfile.json
-    - type: bind
-      source: /root/deploy/whitelist.json
-      target: /whatbot/whitelist.json
-    - type: bind
-      source: /root/deploy/logs.log
-      target: /whatbot/logs.log
+      - type: bind
+        source: /root/deploy/keyfile.json
+        target: /whatbot/keyfile.json
+      - type: bind
+        source: /root/deploy/whitelist.json
+        target: /whatbot/whitelist.json
+      - type: bind
+        source: /root/deploy/logs.log
+        target: /whatbot/logs.log

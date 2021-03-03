@@ -6,7 +6,7 @@
 - hosts: manager
   user: root
   vars:
-  - docker_username: joellefkowitz
+    - docker_username: joellefkowitz
   vars_files: vars.yml
   pre_tasks: &register_swarm_initiator
     - name: Fetch the swarm initiator host

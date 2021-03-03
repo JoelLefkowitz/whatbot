@@ -1,21 +1,21 @@
 export interface Message {
-    text: string;
-    fromMe: boolean;
-    remoteJid: string;
-    timestamp: Date;
+  text: string;
+  fromMe: boolean;
+  remoteJid: string;
+  timestamp: Date;
 }
 
 export interface LazyCondition {
-    label: string;
-    condition: () => boolean;
+  label: string;
+  condition: () => boolean;
 }
 
 export interface InletFeedback {
-    latest: Message;
-    permit: boolean;
+  latest: Message;
+  permit: boolean;
 }
 
 export interface Response {
-    text: string;
-    recipientJid: string;
+  text: string;
+  recipientJid: string;
 }
