@@ -1,0 +1,50 @@
+output_dir: .
+
+clear_top_level: true
+logical_grouping: true
+
+collections:
+  - common
+  - typescript
+
+loader_paths:
+  - docs
+
+protected:
+  - Dockerfile
+
+render_context:
+  project:
+    project_name: whatbot
+    version: 0.4.0
+
+    verbose_name: Whatbot
+    description: A configurable Whatsapp chatbot.
+
+    repository: https://github.com/JoelLefkowitz/whatbot
+    codacy_id: 25c0b5ca8cdf44c9a3963cf81668cf53
+
+    inserts:
+      - usage.md
+
+  author:
+    author: Joel Lefkowitz
+    author_email: joellefkowitz@hotmail.com
+    author_github_handle: joellefkowitz
+
+  package:
+    is_npm_package: true
+    package_name: env-git
+
+  portfolio:
+    is_portfolio: true
+    status_level: 5
+
+    languages:
+      - TypeScript
+
+    frameworks:
+      - Moment
+
+    paradigms:
+      - Object oriented programming
